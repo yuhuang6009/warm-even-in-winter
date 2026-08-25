@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  font-family: 'Instrument Serif', serif;
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Liquid glass pill / panel effect */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Continuous vertical bob on the transparent PNG overlay */
+@keyframes trainBob {
+  0%, 100% { transform: translateY(0) scale(1.03); }
+  50% { transform: translateY(-6px) scale(1.03); }
+}
+.train-bob {
+  animation: trainBob 3s ease-in-out infinite;
+}
+
+/* Video crossfade */
+.video-layer {
+  transition: opacity 1000ms ease-in-out;
+}
+
+/* WarpText WebGL 画布容器
+   WarpText 接管时清空元素文本，h1 在 flex 布局下会塌陷为 0x0，
+   因此用 width:100% + min-height 撑起尺寸；
+   2.82em = 两行文字(2×1.1em) ÷ 纹理最大占比(0.78)，保证文字不被缩小 */
+.warp-text {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 2.82em;
+}
+
+/* 描述段落：WarpText 清空文本后需撑起高度
+   （桌面实测 4 行 × line-height 1.625 ÷ 纹理占比 0.78 ≈ 8.3em，取 8.5em 保证 16px 原字号） */
+.hero-desc.warp-text {
+  min-height: 8.5em;
+}
+
+
+/* Mobile menu entrance */
+@keyframes menuBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes menuLinkIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes menuBtnIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.menu-backdrop-in {
+  animation: menuBackdropIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.menu-link-in {
+  opacity: 0;
+  animation: menuLinkIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.menu-btn-in {
+  opacity: 0;
+  animation: menuBtnIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* 全站页面转场遮罩：进入时淡出，点击导航时淡入 */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0b0d12;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.42s ease;
+}
+.page-transition-on {
+  opacity: 1;
+}
