@@ -295,6 +295,19 @@
   border-bottom-color: #c084fc;
 }
 
+/* 非链接（本机技能，无远端仓库）时的纯文本样式 */
+.ag-card__src--plain {
+  border-bottom: none;
+  cursor: default;
+}
+
+/* 矮窗口时允许整页滚动，避免底部内容被裁掉 */
+@media (max-height: 860px) {
+  .skills-page {
+    overflow-y: auto;
+  }
+}
+
 /* 移动端 */
 @media (max-width: 640px) {
   .skills-page {

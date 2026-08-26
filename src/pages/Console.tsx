@@ -126,7 +126,7 @@ function Console() {
                   className="glass-text font-serif font-normal text-4xl sm:text-5xl md:text-6xl text-white leading-tight"
                   style={{ textShadow: '0 2px 32px rgba(0,0,0,0.45)' }}
                 >
-                  おかえり，{email} 🌸
+                  おかえり，{email}
                 </h2>
               </div>
             )}

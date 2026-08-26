@@ -65,15 +65,19 @@ function CardBody({ cat }: { cat: SkillCategory }) {
         </div>
       )}
 
-      <a
-        className="ag-card__src"
-        href={cat.sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {cat.sourceName} ↗
-      </a>
+      {cat.sourceUrl ? (
+        <a
+          className="ag-card__src"
+          href={cat.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {cat.sourceName} ↗
+        </a>
+      ) : (
+        <span className="ag-card__src ag-card__src--plain">{cat.sourceName}</span>
+      )}
     </div>
   )
 }
@@ -104,7 +108,7 @@ function Skills() {
         </button>
         <h1 className="skills-title">我的 Skills</h1>
         <p className="skills-sub">
-          {SKILL_CATEGORIES.length} 组技能档案 · {TOTAL_SKILLS} 个真实技能包 · 点击展开详情 · 再次点击收起
+          {SKILL_CATEGORIES.length} 组技能档案 · {TOTAL_SKILLS} 个真实技能包 · 鼠标悬停即展开 · ← → 方向键切换
         </p>
       </header>
 
@@ -112,7 +116,7 @@ function Skills() {
         <AccordionGallery
           items={ITEMS}
           defaultIndex={0}
-          trigger="click"
+          trigger="hover"
           expandRatio={0.58}
           height={540}
           gap={12}
@@ -126,7 +130,7 @@ function Skills() {
       </div>
 
       <footer className="skills-foot">
-        <span>↑ 内容面板可滚动 · ← → 方向键切换 · Tab + Enter 键盘可达</span>
+        <span>鼠标悬停任意面板即展开 · ↑ 内容面板可滚动 · ← → 方向键切换 · Tab + Enter 键盘可达</span>
       </footer>
     </section>
   )

@@ -1,3 +1,7 @@
+// 本文件由 scripts/gen-skills.mjs 自动生成，请勿手改！
+// 重新生成：node scripts/gen-skills.mjs
+// 数据来源：C:\Users\huang\.claude\skills（144 个技能包）
+
 import img1015 from '../assets/1015-900x1200.jpg'
 import img1018 from '../assets/1018-900x1200.jpg'
 import img1039 from '../assets/1039-900x1200.jpg'
@@ -7,9 +11,8 @@ export interface SkillCategory {
   id: string
   emoji: string
   title: string
-  /** 副标题：数量 / 来源统计 */
+  /** 副标题：数量统计 */
   sub: string
-  /** 背景图（4 张轮流使用），加载失败时回退到 gradient */
   image: string
   gradient: string
   tagline: string
@@ -23,275 +26,187 @@ export interface SkillCategory {
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    id: 'lang',
+    id: "agile",
     image: img1015,
-    emoji: '💻',
-    title: '语言专家',
-    sub: '12 种语言 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#1a1a2e,#16213e)',
-    tagline: '写出地道、高性能的代码',
-    desc: '覆盖主流编程语言的最佳实践、高级特性与性能优化，从类型系统到异步模式，让每一行代码都符合该语言社区的标准写法。',
-    skills: [
-      'Python Pro',
-      'TypeScript Pro',
-      'JavaScript Pro',
-      'Go Pro',
-      'Rust Engineer',
-      'SQL Pro',
-      'C++ Pro',
-      'Swift Expert',
-      'Kotlin Specialist',
-      'C# Developer',
-      'PHP Pro',
-      'Java Architect'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🏃",
+    title: "敏捷与项目管理",
+    sub: "18 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#2e3a1a,#6f8b2f)",
+    tagline: "需求拆解、迭代与发布节奏",
+    desc: "Sprint 规划、故事拆分、估算、里程碑、发布与上线检查。 本组含 `adopt`、`balance-check`、`day-one-patch` 等 18 个真实技能。",
+    skills: ["adopt","balance-check","day-one-patch","estimate","gate-check","launch-checklist","milestone-review","onboard","project-stage-detect","release-checklist","retrospective","scope-check","sprint-plan","sprint-status","start","story-done","story-readiness","vertical-slice"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'backend',
+    id: "design",
     image: img1018,
-    emoji: '⚙️',
-    title: '后端框架',
-    sub: '7 大后端栈 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#2b1a4e,#7a2f9e)',
-    tagline: '从 API 到微服务的完整后端能力',
-    desc: '主流后端框架的专业级实现指南，涵盖认证授权、数据库建模、异步任务与生产部署的完整最佳实践。',
-    skills: [
-      'NestJS Expert',
-      'Django Expert',
-      'FastAPI Expert',
-      'Spring Boot Engineer',
-      'Laravel Specialist',
-      'Rails Expert',
-      '.NET Core Expert'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🎨",
+    title: "设计与视觉",
+    sub: "18 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#533483,#e94560)",
+    tagline: "UI/UX、品牌与图像创作",
+    desc: "设计系统、前端界面、品牌规范、AI 生图、图像增强与动效。 本组含 `algorithmic-art`、`art-bible`、`artifacts-builder` 等 18 个真实技能。",
+    skills: ["algorithmic-art","art-bible","artifacts-builder","brand-guidelines","canvas-design","design-review","design-system","flux-image","frontend-design","image-enhancer","propagate-design-change","quick-design","slack-gif-creator","theme-factory","ux-design","ux-review","vision-analyze","web-artifacts-builder"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'frontend',
+    id: "arch",
     image: img1039,
-    emoji: '🎨',
-    title: '前端与移动',
-    sub: '6 大前端栈 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#0f3460,#533483)',
-    tagline: '现代 Web 与跨端应用的界面工程',
-    desc: 'React、Vue、Angular 等框架的最佳实践，覆盖组件设计、状态管理、SSR/SSG 与响应式 UI 构建。',
-    skills: [
-      'React Expert',
-      'Next.js Developer',
-      'Vue Expert',
-      'Angular Architect',
-      'React Native Expert',
-      'Flutter Expert'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🏗️",
+    title: "架构与产品设计",
+    sub: "15 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#1a1a2e,#16213e)",
+    tagline: "架构决策、需求规格与产品拆解",
+    desc: "架构评审、史诗/故事拆分、资产规范、需求逆向与产品头脑风暴。 本组含 `architecture-decision`、`architecture-review`、`asset-audit` 等 15 个真实技能。",
+    skills: ["architecture-decision","architecture-review","asset-audit","asset-spec","brainstorm","brainstorming","consistency-check","content-audit","content-research-writer","create-architecture","create-control-manifest","create-epics","create-stories","review-all-gdds","tech-debt"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'infra',
+    id: "ai",
     image: img1043,
-    emoji: '☁️',
-    title: '基础设施与云',
-    sub: '5 大能力 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#1a1a2e,#0f3460)',
-    tagline: '从容器编排到云原生架构',
-    desc: 'Kubernetes 集群管理、基础设施即代码、多云架构与数据库性能调优，为应用打下稳定可靠的底座。',
-    skills: [
-      'Kubernetes Specialist',
-      'Terraform Engineer',
-      'Postgres Pro',
-      'Cloud Architect',
-      'Database Optimizer'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🤖",
+    title: "AI 与技能创作",
+    sub: "11 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#0f3460,#533483)",
+    tagline: "扩展 Claude 能力本身",
+    desc: "技能创建/测试/分享、MCP、浏览器自动化与 API 集成。 本组含 `browseros-neo`、`claude-api`、`composio-skills` 等 11 个真实技能。",
+    skills: ["browseros-neo","claude-api","composio-skills","connect","connect-apps","connect-apps-plugin","mcp-builder","skill-creator","skill-improve","skill-share","skill-test"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'api',
+    id: "quality",
     image: img1015,
-    emoji: '🔌',
-    title: 'API 与架构',
-    sub: '8 大能力 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#16213e,#0f3460)',
-    tagline: '设计可演进、可扩展的系统',
-    desc: 'GraphQL、REST、WebSocket、微服务与 MCP 的全栈架构设计，加上需求收集与规格逆向工程工作流。',
-    skills: [
-      'GraphQL Architect',
-      'API Designer',
-      'WebSocket Engineer',
-      'Microservices Architect',
-      'MCP Developer',
-      'Architecture Designer',
-      'Feature Forge',
-      'Spec Miner'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "✅",
+    title: "测试与质量",
+    sub: "18 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#1b2d2a,#2e5d4e)",
+    tagline: "让每一次交付都经得起验证",
+    desc: "TDD、回归、冒烟、压力、Web 测试、Bug 管理、安全审计与代码评审。 本组含 `bug-report`、`bug-triage`、`code-review` 等 18 个真实技能。",
+    skills: ["bug-report","bug-triage","code-review","perf-profile","qa-plan","receiving-code-review","regression-suite","requesting-code-review","security-audit","smoke-check","soak-test","test-driven-development","test-evidence-review","test-flakiness","test-helpers","test-setup","verification-before-completion","webapp-testing"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'data-ml',
+    id: "office",
     image: img1018,
-    emoji: '🧠',
-    title: '数据与 AI',
-    sub: '6 大能力 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#0f3460,#533483)',
-    tagline: '从数据处理到大模型工程',
-    desc: 'DataFrame 处理、大数据计算、ML 流水线、Prompt 工程、RAG 与模型微调，覆盖 AI 应用的全生命周期。',
-    skills: [
-      'Pandas Pro',
-      'Spark Engineer',
-      'ML Pipeline',
-      'Prompt Engineer',
-      'RAG Architect',
-      'Fine-Tuning Expert'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "📄",
+    title: "文档与办公",
+    sub: "12 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#1a2e1a,#2f6f2f)",
+    tagline: "文档、表格、PDF 与知识沉淀",
+    desc: "docx/xlsx/pdf 处理、文档协作、本地化、清单与归档。 本组含 `changelog`、`changelog-generator`、`doc-coauthoring` 等 12 个真实技能。",
+    skills: ["changelog","changelog-generator","doc-coauthoring","document-skills","docx","file-organizer","invoice-organizer","localize","office-academic-skill","pdf","reverse-document","xlsx"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'quality',
+    id: "learn",
     image: img1039,
-    emoji: '✅',
-    title: '质量与测试',
-    sub: '4 大能力 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#1b2d2a,#2e5d4e)',
-    tagline: '让代码不仅能用，更可靠',
-    desc: '单元、集成、E2E、性能与安全测试的整体策略，浏览器自动化与深度代码审查、文档生成。',
-    skills: ['Test Master', 'Playwright Expert', 'Code Reviewer', 'Code Documenter'],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🎓",
+    title: "学习与求职",
+    sub: "5 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#3a2f1a,#8b6f2f)",
+    tagline: "作业、简历与成长分析",
+    desc: "课件作业、简历定制、工程师成长分析与学术研究写作。 本组含 `chaoxing-homework`、`developer-growth-analysis`、`research-writing-skill` 等 5 个真实技能。",
+    skills: ["chaoxing-homework","developer-growth-analysis","research-writing-skill","scientific-toolkit-skill","tailored-resume-generator"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'devops',
+    id: "web-info",
     image: img1043,
-    emoji: '🚀',
-    title: '运维与可靠性',
-    sub: '5 大能力 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#1a2b3c,#2e5d8b)',
-    tagline: '从 CI/CD 到混沌工程',
-    desc: '持续交付、可观测性、站点可靠性工程、故障注入与 CLI 工具开发，让系统能持续交付且足够健壮。',
-    skills: [
-      'DevOps Engineer',
-      'Monitoring Expert',
-      'SRE Engineer',
-      'Chaos Engineer',
-      'CLI Developer'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🌐",
+    title: "网络与信息获取",
+    sub: "7 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#0f3460,#2e6f8b)",
+    tagline: "联网搜索、抓取与资料调研",
+    desc: "浏览器访问、视频下载、竞品信息提取、域名创意与关键词调研。 本组含 `competitive-ads-extractor`、`domain-name-brainstormer`、`langsmith-fetch` 等 7 个真实技能。",
+    skills: ["competitive-ads-extractor","domain-name-brainstormer","langsmith-fetch","lead-research-assistant","twitter-algorithm-optimizer","youtube-downloader","web-access"],
+    sourceName: "eze-is/web-access",
+    sourceUrl: "https://github.com/eze-is/web-access"
   },
   {
-    id: 'security',
+    id: "story",
     image: img1015,
-    emoji: '🛡️',
-    title: '安全',
-    sub: '2 大能力 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#3a1a1a,#8b2f2f)',
-    tagline: '把漏洞扼杀在代码里',
-    desc: '从编写安全代码到安全审计，覆盖 SAST 分析、渗透测试思路与常见漏洞的防御实践。',
-    skills: ['Secure Code Guardian', 'Security Reviewer'],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🎭",
+    title: "叙事与互动",
+    sub: "3 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#4a0f2e,#a03060)",
+    tagline: "小说改编、剧情与角色塑造",
+    desc: "小说转游戏、剧本分析、角色与世界塑造的叙事工作流。 本组含 `dev-story`、`novel-game-analyze`、`novel-to-game` 等 3 个真实技能。",
+    skills: ["dev-story","novel-game-analyze","novel-to-game"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'platform',
+    id: "workflow",
     image: img1018,
-    emoji: '🏪',
-    title: '平台生态',
-    sub: '4 大平台 · jeffallan/claude-skills',
-    gradient: 'linear-gradient(135deg,#3a2f1a,#8b6f2f)',
-    tagline: '在 SaaS 平台上构建应用',
-    desc: 'Salesforce、Shopify、WordPress 与 Atlassian（Jira/Confluence）的平台开发与生态集成。',
-    skills: [
-      'Salesforce Developer',
-      'Shopify Expert',
-      'WordPress Pro',
-      'Atlassian MCP'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🛠️",
+    title: "开发工作流",
+    sub: "15 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#16213e,#0f3460)",
+    tagline: "调试、规划与高效协作套路",
+    desc: "系统化调试、计划执行、Git 工作树、热修复、子代理并行开发。 本组含 `dispatching-parallel-agents`、`executing-plans`、`finishing-a-development-branch` 等 15 个真实技能。",
+    skills: ["dispatching-parallel-agents","executing-plans","finishing-a-development-branch","help","hotfix","patch-notes","prototype","setup-engine","subagent-driven-development","systematic-debugging","template-skill","using-git-worktrees","using-superpowers","writing-plans","writing-skills"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'workflow',
+    id: "game",
     image: img1039,
-    emoji: '⚡',
-    title: '工作流与效率',
-    sub: '12 类工作流 · 跨两个仓库',
-    gradient: 'linear-gradient(135deg,#2e3a1a,#6f8b2f)',
-    tagline: '把高频任务变成可复用的套路',
-    desc: '调试、全栈实现、决策挑战、需求收集、规格逆向与遗留系统现代化，覆盖开发过程中的高频工作流。',
-    skills: [
-      'Debugging Wizard',
-      'Fullstack Guardian',
-      'The Fool',
-      'Legacy Modernizer',
-      'Embedded Systems',
-      'Game Developer',
-      'Feature Forge',
-      'Spec Miner'
-    ],
-    sourceName: 'jeffallan/claude-skills',
-    sourceUrl: 'https://github.com/jeffallan/claude-skills'
+    emoji: "🕹️",
+    title: "游戏开发",
+    sub: "7 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#2a1a3a,#5f3a8b)",
+    tagline: "从世界观到可玩验证",
+    desc: "游戏概念、世界观、关卡、数值、测试与发布全流程。 本组含 `game-art-direction`、`game-build`、`game-concept` 等 7 个真实技能。",
+    skills: ["game-art-direction","game-build","game-concept","game-qa","game-world-design","map-systems","playtest-report"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'alireza',
+    id: "deck",
     image: img1043,
-    emoji: '🧩',
-    title: '全领域 362 包',
-    sub: '18 个领域 · alirezarezvani/claude-skills',
-    gradient: 'linear-gradient(135deg,#2a1a3a,#5f3a8b)',
-    tagline: '工程 / 产品 / 市场 / 管理层一站式',
-    desc: '362 个生产级技能 + 插件，覆盖 18 个领域：工程核心、POWERFUL 进阶、产品、市场（含 AEO）、生产力、学术研究、项目管理、合规、C-level 咨询等，适配 13 种编码工具。',
-    skills: [
-      'engineering-core',
-      'engineering-powerful',
-      'product',
-      'marketing',
-      'productivity',
-      'research',
-      'research-ops',
-      'project-management',
-      'ra-qm',
-      'compliance-os',
-      'c-level',
-      'business-growth',
-      'business-operations',
-      'commercial',
-      'finance',
-      'loop-library',
-      'markdown-html'
-    ],
-    sourceName: 'alirezarezvani/claude-skills',
-    sourceUrl: 'https://github.com/alirezarezvani/claude-skills',
-    install: '/plugin marketplace add alirezarezvani/claude-skills\n/plugin install engineering-skills@claude-code-skills'
+    emoji: "🎞️",
+    title: "演示文稿",
+    sub: "3 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#4a1d0f,#a03030)",
+    tagline: "从翻页 PPT 到专业发布会风格",
+    desc: "用 HTML/单文件生成高质感 PPT、slides 与演示文稿。 本组含 `guizang-ppt-skill`、`html-ppt`、`pptx` 等 3 个真实技能。",
+    skills: ["guizang-ppt-skill","html-ppt","pptx"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
   },
   {
-    id: 'soulkiller',
+    id: "team",
     image: img1015,
-    emoji: '🕹️',
-    title: 'SOULKILLER',
-    sub: '数字灵魂 · 文字冒险引擎',
-    gradient: 'linear-gradient(135deg,#4a0f2e,#a03060)',
-    tagline: '把人物数字足迹变成可游玩的 Galgame',
-    desc: '输入名字创建角色、输入世界观创建世界，两步生成一部完整的文字冒险视觉小说。预制 55 个角色 + 6 个世界观（Fate/Zero、三国、白色相簿2、赛博朋克2077…），导出的 .skill 档案可在 Claude Code / OpenClaw 中直接游玩。',
-    skills: [
-      '/create 角色',
-      '/world 世界',
-      '/export 导出',
-      '/unpack 导入',
-      '/use 对话',
-      '/install 预制',
-      'soul.pack',
-      'world.pack',
-      'Galgame 引擎',
-      '存档读档',
-      '好感度追踪',
-      '分支树可视化'
-    ],
-    sourceName: 'SOULKILLER · GPL-3.0',
-    sourceUrl: 'https://github.com/nicepkg/openclaw',
-    install: 'curl -fsSL https://soulkiller-download.ad546971975.workers.dev/scripts/install.sh | sh'
-  }
+    emoji: "👥",
+    title: "团队协作",
+    sub: "11 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#1a2b3c,#2e5d8b)",
+    tagline: "从站会到回顾的团队节奏",
+    desc: "团队周报、会议洞察、协作沟通与成员对齐。 本组含 `internal-comms`、`meeting-insights-analyzer`、`team-audio` 等 11 个真实技能。",
+    skills: ["internal-comms","meeting-insights-analyzer","team-audio","team-combat","team-level","team-live-ops","team-narrative","team-polish","team-qa","team-release","team-ui"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
+  },
+  {
+    id: "misc",
+    image: img1018,
+    emoji: "📦",
+    title: "效率小工具",
+    sub: "1 个技能包 · 本机已安装",
+    gradient: "linear-gradient(135deg,#2a1a3a,#5f3a8b)",
+    tagline: "各种好用的一次性利器",
+    desc: "未归类的实用小工具，开箱即用。 本组含 `raffle-winner-picker` 等 1 个真实技能。",
+    skills: ["raffle-winner-picker"],
+    sourceName: "本机 · Claude Skills",
+    sourceUrl: ""
+  },
 ]
+
+export const SKILL_TOTAL = SKILL_CATEGORIES.reduce((n, c) => n + c.skills.length, 0)
