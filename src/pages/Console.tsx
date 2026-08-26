@@ -35,6 +35,11 @@ function Console() {
   }
 
   const switchTab = (t: Tab) => {
+    if (t === 'skills') {
+      setMenuOpen(false)
+      navigate('/skills')
+      return
+    }
     setTab(t)
     setMenuOpen(false)
   }
@@ -123,17 +128,6 @@ function Console() {
                 >
                   おかえり，{email} 🌸
                 </h2>
-              </div>
-            )}
-
-            {tab === 'skills' && (
-              <div className="h-full flex items-center justify-center">
-                <div className="glass-panel rounded-3xl px-8 py-6 text-center">
-                  <Package className="w-8 h-8 text-white/80 mx-auto mb-3" />
-                  <p className="glass-text text-white/90 text-base" style={UI_FONT}>
-                    我的Skills 建设中…
-                  </p>
-                </div>
               </div>
             )}
 
