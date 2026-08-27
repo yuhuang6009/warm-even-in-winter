@@ -24,10 +24,15 @@ const VIDEOS = [
 const OVERLAY =
   'https://soft-zoom-63098134.figma.site/_assets/v11/0b4a435b2df2747593c43d7a1c9b4578f7d8d90c.png'
 
-// 站内路由（HashRouter）：作品集 → 技能档案页，工作台 → 控制台
+// 后端地址：构建时通过 VITE_BACKEND_URL 注入（如 https://ai-workbench.onrender.com）。
+// 目前仅邮件订阅用它；不设该变量时为空串 → 走同源相对路径。
+const BACKEND = ((import.meta.env.VITE_BACKEND_URL as string | undefined) ?? '').replace(/\/+$/, '')
+
+// 纯静态托管（GitHub Pages）下只有 SPA 三个页面存在，导航走站内 hash 路由。
+// 后端上线后改回 `${BACKEND}/portfolio` 等即可。
 const NAV_LINKS = [
-  { label: '作品集', href: '/skills' },
-  { label: '工作台', href: '/console' },
+  { label: '作品集', href: '#/skills' },
+  { label: '工作台', href: '#/console' },
 ]
 
 const UI_FONT = { fontFamily: "'system-ui', sans-serif" }
@@ -95,8 +100,8 @@ function Home() {
     if (navLeaving) return
     setNavLeaving(true)
     window.setTimeout(() => {
-      // 站内路径走 SPA 路由（hash），避免整页跳转到不存在路径导致 404
-      if (href.startsWith('/')) navigate(href)
+      // #/ 开头为 SPA 站内路由 → navigate()；其余（如后端 /portfolio）→ 整页跳转
+      if (href.startsWith('#')) navigate(href.slice(1))
       else window.location.href = href
     }, 420)
   }
@@ -107,7 +112,7 @@ function Home() {
     if (!value) return
     setEmailState('sending')
     try {
-      const resp = await fetch('/api/early-access', {
+      const resp = await fetch(`${BACKEND}/api/early-access`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: value }),
@@ -191,10 +196,10 @@ function Home() {
               </a>
             ))}
             <a
-              href="/console"
+              href="#/console"
               onClick={(e) => {
                 e.preventDefault()
-                go('/console')
+                go('#/console')
               }}
               className="ml-1 bg-white text-black rounded-full px-5 py-2 text-sm font-medium hover:bg-gray-100 transition-colors whitespace-nowrap"
             >
@@ -352,11 +357,11 @@ function Home() {
               </a>
             ))}
             <a
-              href="/console"
+              href="#/console"
               onClick={(e) => {
                 e.preventDefault()
                 setMenuOpen(false)
-                go('/console')
+                go('#/console')
               }}
               className="bg-white text-black rounded-full px-8 py-3 text-base font-medium menu-btn-in mt-3"
               style={{ animationDelay: '350ms' }}
