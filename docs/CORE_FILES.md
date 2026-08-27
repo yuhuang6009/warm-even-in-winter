@@ -18,7 +18,7 @@
 | `src/index.css` | Tailwind + 玻璃拟态 + WarpText 撑高 + 转场遮罩 + 动画 | ✅ 稳定（撑高数字勿乱改） |
 | `src/warp-text.js` | WarpText 原生 ESM 模块（WebGL 文字动效） | ✅ 稳定（见「不该犯的错」） |
 | `src/vendor/ogl/` | 本地 OGL WebGL 库（ESM 源码，未走 npm） | ✅ 可用（体积待裁剪） |
-| `src/pages/Home.tsx` | 首页（视频背景 + WarpText + 订阅 + 转场） | ⚠️ 导航仍指向旧站路由 |
+| `src/pages/Home.tsx` | 首页（视频背景 + WarpText + 订阅 + 转场） | ✅ 稳定（导航已改为站内路由） |
 | `src/pages/Console.tsx` | 工作台（玻璃 UI + 账号 + 登出） | ✅ 稳定（设置页为占位） |
 | `src/pages/Skills.tsx` + `skills.css` | 技能档案（AccordionGallery） | ✅ 稳定 |
 | `src/components/AccordionGallery.tsx` + `.css` | GSAP 手风琴画廊 | ✅ 稳定（相对原版有扩展） |
@@ -44,7 +44,7 @@
 - 场景换肤：切到 Deep Woods（activeVideo === 2）文字变深蓝 `#182C41`，延迟 **800ms** 再 `refreshColors()`（见坑 4）。
 - 邮箱订阅 → `POST /api/early-access`（占位接口，纯静态托管下 404 走错误态）。
 - 订阅成功后按钮变「登录」，账号存 `localStorage['lumora.user']`，进入 `#/console`。
-- ⚠️ `NAV_LINKS` 与「进入工作台」仍指向旧站路由 `/portfolio`、`/workbench`、`/portfolio/projects`、`/portfolio/chat`。这些路由在本 SPA 里不存在，点击会整页跳转并 404——全面切换前需改。
+- ✅ `NAV_LINKS` 与「进入工作台」已改为站内路由（HashRouter）：作品集 → `#/skills`，工作台 → `#/console`；`go()` 对站内路径走 `navigate()`，不再整页跳转，旧站路由已移除。
 
 ### 3. 控制台 Console.tsx
 
@@ -100,8 +100,8 @@
    - 必须 `await document.fonts.ready`，否则用 fallback 字体生成纹理，字会「变」。
 6. **行高单位混用**
    - 相对行高（`1.1` / `1.1em`）是相对字号的值，要乘 fontSizePx 换算；先判断 `computed.lineHeight` 是否以 `px` 结尾再处理。
-7. **首页导航仍指向旧站路由**
-   - `/portfolio*`、`/workbench` 在本 SPA 中不存在。全面切换 lumora 时记得改 `Home.tsx` 的 `NAV_LINKS` / 移动菜单 /「进入工作台」。
+7. ~~**首页导航仍指向旧站路由**~~（已修复）
+   - 旧站 `/portfolio*`、`/workbench` 在本 SPA 中不存在，已改为站内路由（作品集 → `#/skills`、工作台 → `#/console`），`go()` 统一走 `navigate()`。若再新增链接：`href.startsWith('/')` 走 SPA 路由，否则走整页跳转。
 8. **邮件订阅没后端**
    - `POST /api/early-access` 在纯静态托管下 404。前端已兜底显示错误态；接入真实后端后无需改前端。
 9. **WebGL 上下文丢失不处理**

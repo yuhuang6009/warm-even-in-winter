@@ -24,11 +24,10 @@ const VIDEOS = [
 const OVERLAY =
   'https://soft-zoom-63098134.figma.site/_assets/v11/0b4a435b2df2747593c43d7a1c9b4578f7d8d90c.png'
 
+// 站内路由（HashRouter）：作品集 → 技能档案页，工作台 → 控制台
 const NAV_LINKS = [
-  { label: '作品集', href: '/portfolio' },
-  { label: '工作台', href: '/workbench' },
-  { label: '项目', href: '/portfolio/projects' },
-  { label: '聊天', href: '/portfolio/chat' },
+  { label: '作品集', href: '/skills' },
+  { label: '工作台', href: '/console' },
 ]
 
 const UI_FONT = { fontFamily: "'system-ui', sans-serif" }
@@ -96,7 +95,9 @@ function Home() {
     if (navLeaving) return
     setNavLeaving(true)
     window.setTimeout(() => {
-      window.location.href = href
+      // 站内路径走 SPA 路由（hash），避免整页跳转到不存在路径导致 404
+      if (href.startsWith('/')) navigate(href)
+      else window.location.href = href
     }, 420)
   }
 
@@ -190,10 +191,10 @@ function Home() {
               </a>
             ))}
             <a
-              href="/workbench"
+              href="/console"
               onClick={(e) => {
                 e.preventDefault()
-                go('/workbench')
+                go('/console')
               }}
               className="ml-1 bg-white text-black rounded-full px-5 py-2 text-sm font-medium hover:bg-gray-100 transition-colors whitespace-nowrap"
             >
@@ -351,11 +352,11 @@ function Home() {
               </a>
             ))}
             <a
-              href="/workbench"
+              href="/console"
               onClick={(e) => {
                 e.preventDefault()
                 setMenuOpen(false)
-                go('/workbench')
+                go('/console')
               }}
               className="bg-white text-black rounded-full px-8 py-3 text-base font-medium menu-btn-in mt-3"
               style={{ animationDelay: '350ms' }}
