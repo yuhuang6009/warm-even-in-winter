@@ -46,7 +46,7 @@
 - 邮箱订阅 → `POST /api/early-access`（占位接口，纯静态托管下 404 走错误态）。
 - 订阅成功后按钮变「登录」，账号存 `localStorage['lumora.user']`，进入 `#/console`。
 
-- ✅ `NAV_LINKS` 与「进入工作台」已改为站内路由（HashRouter）：作品集 → `#/skills`，工作台 → `#/console`。`go()` 对站内路径走 `navigate()`，不再整页跳转，旧站路由已移除。
+- ✅ `NAV_LINKS` 与「进入工作台」走站内路由（HashRouter）：作品集 → `#/skills`，工作台 → `#/console`，**仅 2 个入口**——后端未部署时 `/portfolio`、`/workbench` 会 404，故暂不放。`href` 带 `#` 前缀，JS 未执行或中键新标签打开也不会 404。后端上线后把 `NAV_LINKS` 改回 `${BACKEND}/...` 即可。
 
 ### 3. 控制台 Console.tsx
 
@@ -104,7 +104,7 @@
 
 
 7. ~~**首页导航仍指向旧站路由**~~（已修复）
-   - 旧站 `/portfolio*`、`/workbench` 在本 SPA 中不存在。已改为站内路由（作品集 → `#/skills`、工作台 → `#/console`），`go()` 统一走 `navigate()`；若再新增站外链接，注意保持 `href.startsWith('/')` 走 SPA 路由、否则走整页跳转的分支。
+   - 旧站 `/portfolio*`、`/workbench` 在本 SPA 中不存在。已改为站内路由（作品集 → `#/skills`、工作台 → `#/console`）；`go()` 按 `href.startsWith('#')` 分流——`#` 开头走 `navigate()`（SPA 站内），其余整页跳转（后端页面）。后端上线后把 `NAV_LINKS` 改回 `${BACKEND}/...` 即可，`go()` 两种都支持。
 8. **邮件订阅没后端**
    - `POST /api/early-access` 在纯静态托管下 404。前端已兜底显示错误态；接入真实后端后无需改前端。
 9. **WebGL 上下文丢失不处理**
