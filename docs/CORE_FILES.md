@@ -1,9 +1,11 @@
 # 核心文件现状（Core Files Status）
 
-> 更新日期：2026-08-26 ｜ HEAD：`8673d54`
+> 更新日期：2026-09-28
 >
 > 给维护 / 接手本网站的人看的「每个核心文件是什么、什么状态、动它要小心什么」，
 > 以及从历史踩坑里总结的「不该犯的错」清单。动手改代码前建议先通读一遍。
+>
+> 网站总览、部署方式、三站合一架构见根目录 `README.md`。
 
 ---
 
@@ -44,7 +46,9 @@
 - 场景换肤：切到 Deep Woods（activeVideo === 2）文字变深蓝 `#182C41`，延迟 **800ms** 再 `refreshColors()`（见坑 4）。
 - 邮箱订阅 → `POST /api/early-access`（占位接口，纯静态托管下 404 走错误态）。
 - 订阅成功后按钮变「登录」，账号存 `localStorage['lumora.user']`，进入 `#/console`。
-- ✅ `NAV_LINKS` 与「进入工作台」已改为站内路由（HashRouter）：作品集 → `#/skills`，工作台 → `#/console`；`go()` 对站内路径走 `navigate()`，不再整页跳转，旧站路由已移除。
+- ✅ `NAV_LINKS` 与「进入工作台」走站内路由（HashRouter）：作品集 → `#/skills`，工作台 → `#/console`。
+  **仅 2 个入口**——后端未部署，`/portfolio`、`/workbench` 在纯静态托管下会 404，故暂不放。
+  `href` 带 `#` 前缀，JS 未执行或中键新标签打开也不会 404。后端上线后把 `NAV_LINKS` 改回 `${BACKEND}/...` 即可。
 
 ### 3. 控制台 Console.tsx
 
@@ -101,7 +105,7 @@
 6. **行高单位混用**
    - 相对行高（`1.1` / `1.1em`）是相对字号的值，要乘 fontSizePx 换算；先判断 `computed.lineHeight` 是否以 `px` 结尾再处理。
 7. ~~**首页导航仍指向旧站路由**~~（已修复）
-   - 旧站 `/portfolio*`、`/workbench` 在本 SPA 中不存在，已改为站内路由（作品集 → `#/skills`、工作台 → `#/console`），`go()` 统一走 `navigate()`。若再新增链接：`href.startsWith('/')` 走 SPA 路由，否则走整页跳转。
+   - 旧站 `/portfolio*`、`/workbench` 在本 SPA 中不存在，已改为站内路由（作品集 → `#/skills`、工作台 → `#/console`）。`go()` 按 `href.startsWith('#')` 分流：`#` 开头走 `navigate()`（SPA 站内），其余整页跳转（后端页面）。后端上线后把 `NAV_LINKS` 改回 `${BACKEND}/...` 即可，`go()` 两种都支持。
 8. **邮件订阅没后端**
    - `POST /api/early-access` 在纯静态托管下 404。前端已兜底显示错误态；接入真实后端后无需改前端。
 9. **WebGL 上下文丢失不处理**
@@ -115,9 +119,18 @@
 
 ---
 
-## 四、部署现状（2026-08-26 核查）
+## 四、部署现状（2026-09-28 核查）
 
-- 仓库：`D:\Claude Project\learning for myself\vibecoding\lumora`，git 干净，HEAD `8673d54`。
-- 构建：`npm run build`（`tsc -b` + Vite 8）✅ 通过，产物在 `dist/`。
-- 端口 8000：**当前无服务**（曾有临时静态服务器，会话结束后已停；该端口现被本机 KuGou 占用但不响应 HTTP）。
-- 部署建议：HashRouter 无需 rewrite，上传 `dist/` 到任意静态托管即可；或 `cd dist && python -m http.server 8000`（详见 `README.md` 的「构建与部署」）。
+- **仓库**：`yuhuang6009/warm-even-in-winter`（原 `lumora`，2026-09-28 改名）。
+  本地路径 `D:\Claude Project\learning for myself\vibecoding\lumora`，git 干净。
+- **线上**：<https://yuhuang6009.github.io/warm-even-in-winter/> —— GitHub Pages，
+  push 到 `main` 由 `.github/workflows/deploy.yml` 自动构建部署。
+- **构建**：`npm run build`（`tsc -b` + Vite 8）✅ 通过，产物 `dist/` 约 1.4MB。
+- **本地预览**：`workstation/ai-workbench/main.py`（FastAPI）会把 `dist/` 托管在
+  `http://127.0.0.1:8000`；改完前端需先 `npm run build` 才生效。
+  或 `cd dist && python -m http.server 8000`。
+- **改名不影响部署**：`vite.config.ts` 的 `base: './'` 是相对路径，产物可在任意子目录运行，
+  仓库改名后**无需**改配置或重新设置 Pages。
+
+> ⚠️ 本文件与旧版 `README.md` 曾是近重复内容，2026-09-28 已拆分职责：
+> `README.md` 只讲**整站总览与部署**，本文件讲**核心文件现状与踩坑清单**。修改时别再互相复制。
